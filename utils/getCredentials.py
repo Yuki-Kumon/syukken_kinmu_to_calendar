@@ -1,7 +1,7 @@
-from __future__ import print_function
-import datetime
+# from __future__ import print_function
+# import datetime
 import os.path
-from googleapiclient.discovery import build
+# from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -33,6 +33,8 @@ def getCredentials(tokenPass='token.json', clientSecretPass='client_secret,json'
 
 
 if __name__ == '__main__':
+    import datetime
+    from googleapiclient.discovery import build
     # 動作テスト
     creds = getCredentials(clientSecretPass='./secret/client_secret_508123958036-57icko740m45opd0utd92891n07p0iqe.apps.googleusercontent.com.json')
     service = build('calendar', 'v3', credentials=creds)
