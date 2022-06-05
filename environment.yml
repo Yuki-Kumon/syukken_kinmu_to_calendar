@@ -1,5 +1,7 @@
 name: syukken_kinmu_to_calendar
 dependencies:
+  - pandas
+  - openpyxl
   - pip
   - pip:
     - google-api-python-client

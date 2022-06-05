@@ -1,10 +1,11 @@
 import csv
 
 
-def loadCsv(csvFile='./data/kinmu.xlsx', userRowStart=35, dateLine=0, dataLineStart=3, dataLineEnd=33, year=2022):
+def loadCsv(csvFile='./data/kinmu.xlsx', userRowStart=35, dateLine=0, dataLineStart=3, dataLineEnd=33, year=2022, stream=False):
     # 31日までの月はdateLineEnd=33
     csv_input = []
-    with open(csvFile, 'r') as f:
+    # ioStreamを読み込む場合はopenを省略する
+    with open(csvFile, 'r') if not stream else csvFile as f:
         reader = csv.reader(f)
         for row in reader:
             csv_input.append(row)
