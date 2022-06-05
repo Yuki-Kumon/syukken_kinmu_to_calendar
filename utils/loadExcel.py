@@ -12,6 +12,7 @@ def serialToDateTime(serialVal):
         serialVal (float): シリアル値(Ex: 44434.3412172569)
     Returns:
         str: 時刻  yyyy/MM/dd HH:MM:ss 形式
+    参考: https://qiita.com/Yusuke_Pipipi/items/5227bd8187a584ac391b
     """
     try:
         sDateTime = (datetime.datetime(1899, 12, 30) + datetime.timedelta(serialVal)).strftime('%m月%d日')
