@@ -10,7 +10,7 @@ from google.oauth2.credentials import Credentials
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 
-def getCredentials(tokenPass='token.json', clientSecretPass='client_secret,json'):
+def getCredentials(tokenPass='token.json', clientSecretPass='client_secret,json', save=True):
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -26,8 +26,9 @@ def getCredentials(tokenPass='token.json', clientSecretPass='client_secret,json'
                 clientSecretPass, SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
-        with open(tokenPass, 'w') as token:
-            token.write(creds.to_json())
+        if save:
+            with open(tokenPass, 'w') as token:
+                token.write(creds.to_json())
 
     return creds
 
@@ -36,7 +37,7 @@ if __name__ == '__main__':
     import datetime
     from googleapiclient.discovery import build
     # 動作テスト
-    creds = getCredentials(clientSecretPass='./secret/client_secret_508123958036-57icko740m45opd0utd92891n07p0iqe.apps.googleusercontent.com.json')
+    creds = getCredentials(clientSecretPass='./secret/client_secret_508123958036-57icko740m45opd0utd92891n07p0iqe.apps.googleusercontent.com.json', save=False)
     service = build('calendar', 'v3', credentials=creds)
 
     now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
