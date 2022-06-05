@@ -8,14 +8,15 @@ convertedData = {
 
 #A 休日、出勤日ごとに別のリストで出力
 output = {
-    'summary': 早出(8:20〜)',
+    'summary': '早出(8:20〜)',
     'description': '早出のため出勤時刻に注意！\n編成・作業: W0\n特記事項: A構内試運転',
     'start': {
-        'dateTime': '2022-06-01',
+        # 'dateTime': '2022-06-01T00:00:00',
+        'date': '2022-06-01',
         'timeZone': 'Japan',
     },
     'end': {
-        'dateTime': '2022-06-01',
+        'date': '2022-06-01',
         'timeZone': 'Japan',
     },
 }
@@ -24,17 +25,18 @@ output = {
 
 def dataToCalendarEvent(convertedData):
     weekdayList = []
+    earlydayList = []
     holidayList = []
     for data in convertedData:
         eventData = {
             'summary': data['title'],
             'description': data['remark'],
             'start': {
-                'dateTime': data['date'],
+                'date': data['date'],
                 'timeZone': 'Japan',
             },
             'end': {
-                'dateTime': data['date'],
+                'date': data['date'],
                 'timeZone': 'Japan',
             },
         }
@@ -42,11 +44,13 @@ def dataToCalendarEvent(convertedData):
             holidayList.append(eventData)
         elif data['type'] == 1:
             weekdayList.append(eventData)
+        elif data['type'] == 2:
+            earlydayList.append(eventData)
         else:
             # 暫定処置
             weekdayList.append(eventData)
 
-    return weekdayList, holidayList
+    return weekdayList, earlydayList, holidayList
 
 
 if __name__ == '__main__':
