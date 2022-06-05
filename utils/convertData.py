@@ -5,20 +5,6 @@ output = {
     'title': '出勤(8:50〜)',
     'remark': '編成・作業: W0\n特記事項: A構内試運転',
 }
-
-#A 休日、出勤日ごとに別のリストで出力
-output = {
-    'summary': 早出(8:20〜)',
-    'description': '早出のため出勤時刻に注意！\n編成・作業: W0\n特記事項: A構内試運転',
-    'start': {
-        'dateTime': '2022-06-01',
-        'timeZone': 'Japan',
-    },
-    'end': {
-        'dateTime': '2022-06-01',
-        'timeZone': 'Japan',
-    },
-}
 """
 
 
@@ -53,11 +39,8 @@ CONVERT_RULE = {
 
 def convertData(user_input, date_input):
     output = []
-    print(datetime.datetime.strptime('2022年' + '6月1日', '%Y年%m月%d日'))
-    print(date_input)
-    print(user_input)
     for idx, date_row in enumerate(date_input):
-        event_type = CONVERT_RULE['work'].get(user_input[0][idx], 99)
+        event_type = CONVERT_RULE['work'].get(user_input[0][idx], 99)  # エラーの際は99を返す
         remark_text = ''
         if event_type == 1:
             remark_text += '早出のため出勤時刻に注意！\n'
@@ -74,12 +57,7 @@ def convertData(user_input, date_input):
             'remark': remark_text,
         })
 
-    print(output)
     return output
-
-
-def dataToCalendarEvent(convertedData):
-    pass
 
 
 if __name__ == '__main__':
