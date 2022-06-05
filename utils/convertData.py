@@ -52,7 +52,7 @@ def convertData(user_input, date_input):
             remark_text += '特記事項: 特になし\n'
         output.append({
             'date': datetime.datetime.strptime(date_row, '%Y年%m月%d日').strftime('%Y-%m-%d'),
-            'type': event_type,
+            'type': 0 if event_type in [2, 3, 4] else 1 if event_type == 0 else 2 if event_type == 1 else event_type,
             'title': CONVERT_RULE['description'].get(event_type),
             'remark': remark_text,
         })
