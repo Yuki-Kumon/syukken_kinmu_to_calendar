@@ -22,10 +22,14 @@ calendar_idについて、`./secret`に以下のフォーマットで保存。
 
 |引数|説明|
 |:-|:-|
+|excel|エクセルファイルのパス|
+|calendarId|calendaridのファイルのパス|
+|clientSecret|client secretのファイルのパス|
+|token|access tokenのファイルのパス|
 |dateEnd|月の日数|
 |userRowStart|勤務表で自分の勤務が何行目から記載されているか(一番上の行を0行目として数える)。|
 
 実行例
 ```
-python insertFromExcel.py --dateEnd 30 --userRowStart 35
+python insertFromExcel.py --excel ./data/syukkin.xlsx --calendarId ./secret/cfalendarId.json --clientSecret ./secret/clientSecret.json --token ./secret accessToken.json --dateEnd 30 --userRowStart 35
 ```
