@@ -2,7 +2,7 @@ import io
 import pandas as pd
 import datetime
 
-from utils.loadCsv import loadCsv
+from utils.loadCsv import loadCsvStream
 # from loadCsv import loadCsv
 
 
@@ -30,7 +30,7 @@ def loadExcel(excelFile='./data/2022_6.xlsx', userRowStart=35, dateLine=0, dataL
     df.to_csv(csv_stream, index=False, header=False)
     csv_stream.seek(0)
 
-    return loadCsv(csv_stream, userRowStart, dateLine, dataLineStart, dataLineEnd, year, True)
+    return loadCsvStream(csv_stream, userRowStart, dateLine, dataLineStart, dataLineEnd, year)
 
 
 if __name__ == '__main__':

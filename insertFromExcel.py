@@ -17,7 +17,7 @@ if __name__ == '__main__':
     parser.add_argument('--calendarId', default='./secret/calendar.json')
     parser.add_argument('--clientSecret', default='./secret/client_secret_508123958036-57icko740m45opd0utd92891n07p0iqe.apps.googleusercontent.com.json')
     parser.add_argument('--token', default='./secret/accessToken.json')
-    parser.add_argument('--dateEnd', type=int, default=31)  # 月の最終日
+    parser.add_argument('--dateEnd', type=int, default=1)  # 月の最終日
     parser.add_argument('--userRowStart', type=int, default=35)
 
     args = parser.parse_args()

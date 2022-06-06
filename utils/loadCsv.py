@@ -1,14 +1,12 @@
 import csv
 
 
-def loadCsv(csvFile='./data/kinmu.xlsx', userRowStart=35, dateLine=0, dataLineStart=3, dataLineEnd=33, year=2022, stream=False):
+def loadCsvStream(csvStream, userRowStart=35, dateLine=0, dataLineStart=3, dataLineEnd=33, year=2022):
     # 31日までの月はdateLineEnd=33
     csv_input = []
-    # ioStreamを読み込む場合はopenを省略する
-    with open(csvFile, 'r') if not stream else csvFile as f:
-        reader = csv.reader(f)
-        for row in reader:
-            csv_input.append(row)
+    reader = csv.reader(csvStream)
+    for row in reader:
+        csv_input.append(row)
     # 勤務情報の抜き出し
     user_input = csv_input[userRowStart:userRowStart + 3]
     user_input = [row[dataLineStart:dataLineEnd + 1] for row in user_input]
@@ -17,6 +15,11 @@ def loadCsv(csvFile='./data/kinmu.xlsx', userRowStart=35, dateLine=0, dataLineSt
     date_input = [str(year) + '年' + row for row in date_input]
 
     return user_input, date_input
+
+
+def loadCsv(csvFile='./data/kinmu.xlsx', userRowStart=35, dateLine=0, dataLineStart=3, dataLineEnd=33, year=2022):
+    with open(csvFile, 'r') as f:
+        return loadCsvStream(f, userRowStart, dateLine, dataLineStart, dataLineEnd, year)
 
 
 if __name__ == '__main__':
