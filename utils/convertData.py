@@ -19,6 +19,7 @@ CONVERT_RULE = {
         '特': 2,
         '公': 3,
         '帰休': 4,
+        '年': 5,
     },
     'description': {
         0: '出勤(8:50〜)',
@@ -26,6 +27,7 @@ CONVERT_RULE = {
         2: '特休',
         3: '公休',
         4: '一時帰休',
+        5: '年休',
         99: 'エラー！勤務表を要確認！',
     },
     'remark': {
@@ -52,7 +54,7 @@ def convertData(user_input, date_input):
             remark_text += '特記事項: 特になし\n'
         output.append({
             'date': datetime.datetime.strptime(date_row, '%Y年%m月%d日').strftime('%Y-%m-%d'),
-            'type': 0 if event_type in [2, 3, 4] else 1 if event_type == 0 else 2 if event_type == 1 else event_type,
+            'type': 0 if event_type in [2, 3, 4, 5] else 1 if event_type == 0 else 2 if event_type == 1 else event_type,
             'title': CONVERT_RULE['description'].get(event_type),
             'remark': remark_text,
         })
