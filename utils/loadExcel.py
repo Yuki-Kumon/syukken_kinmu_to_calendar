@@ -22,7 +22,7 @@ def serialToDateTime(serialVal):
     return sDateTime
 
 
-def loadExcel(excelFile='./data/2022_6.xlsx', userRowStart=35, dateLine=0, dataLineStart=3, dataLineEnd=33, year=2022):
+def loadExcel(excelFile='./data/2022_6.xlsx', userRowStart=35, workRowStart=58, dateLine=0, dataLineStart=3, dataLineEnd=33, year=2022):
     csv_stream = io.StringIO()
     df = pd.read_excel(excelFile, header=None)  # 1枚目のシートを読み込む
     # excelのシリアル値を日付に変更
@@ -30,7 +30,7 @@ def loadExcel(excelFile='./data/2022_6.xlsx', userRowStart=35, dateLine=0, dataL
     df.to_csv(csv_stream, index=False, header=False)
     csv_stream.seek(0)
 
-    return loadCsvStream(csv_stream, userRowStart, dateLine, dataLineStart, dataLineEnd, year)
+    return loadCsvStream(csv_stream, userRowStart, workRowStart, dateLine, dataLineStart, dataLineEnd, year)
 
 
 if __name__ == '__main__':

@@ -39,7 +39,52 @@ CONVERT_RULE = {
 }
 
 
-def convertData(user_input, date_input):
+def convertWork(work_input, idx):
+    work_text = ''
+    flag = False
+
+    if work_input[0][idx]:
+        flag = True
+        work_text += '搭載品降ろし(早出): ' + work_input[0][idx] + '\n'
+    if work_input[1][idx] or work_input[2][idx]:
+        flag = True
+        work_text += '前作業: '
+        if work_input[1][idx]:
+            work_text += work_input[1][idx]
+        elif work_input[2][idx]:
+            work_text += work_input[2][idx]
+        if work_input[2][idx]:
+            work_text += '・' + work_input[2][idx]
+        work_text += '\n'
+    if work_input[3][idx]:
+        flag = True
+        work_text += '臨時作業・仕業検査: ' + work_input[3][idx] + '\n'
+    if work_input[4][idx]:
+        flag = True
+        work_text += 'A構内試運転: ' + work_input[4][idx] + '\n'
+    if work_input[5][idx]:
+        flag = True
+        work_text += 'B構内試運転: ' + work_input[5][idx] + '\n'
+    if work_input[6][idx]:
+        flag = True
+        work_text += 'C構内試運転: ' + work_input[6][idx] + '\n'
+    if work_input[7][idx]:
+        flag = True
+        work_text += '本線試運転(西行き・6793): ' + work_input[7][idx] + '\n'
+    if work_input[8][idx]:
+        flag = True
+        work_text += '本線試運転(東行き・6778): ' + work_input[8][idx] + '\n'
+    if work_input[9][idx]:
+        flag = True
+        work_text += '本線試運転(6795): ' + work_input[9][idx] + '\n'
+
+    if flag:
+        return '\n【作業予定】\n' + work_text
+    else:
+        return ''
+
+
+def convertData(user_input, work_input, date_input):
     output = []
     for idx, date_row in enumerate(date_input):
         event_type = CONVERT_RULE['work'].get(user_input[0][idx], 99)  # エラーの際は99を返す
@@ -52,6 +97,7 @@ def convertData(user_input, date_input):
             remark_text += '特記事項: ' + CONVERT_RULE['remark'].get(user_input[2][idx], user_input[2][idx]) + '\n'
         else:
             remark_text += '特記事項: 特になし\n'
+        remark_text += convertWork(work_input, idx)
         output.append({
             'date': datetime.datetime.strptime(date_row, '%Y年%m月%d日').strftime('%Y-%m-%d'),
             'type': 0 if event_type in [2, 3, 4, 5] else 1 if event_type == 0 else 2 if event_type == 1 else event_type,

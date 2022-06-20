@@ -19,6 +19,7 @@ if __name__ == '__main__':
     parser.add_argument('--token', default='./secret/accessToken.json')
     parser.add_argument('--dateEnd', type=int, default=31)  # 月の最終日
     parser.add_argument('--userRowStart', type=int, default=35)
+    parser.add_argument('--workRowStart', type=int, default=58)
 
     args = parser.parse_args()
 
@@ -28,7 +29,7 @@ if __name__ == '__main__':
 
     # イベントのリストの作成
     dataLineEnd = args.dateEnd + 2
-    weekdayList, earlydayList, holidayList = dataToCalendarEvent(convertData(*loadExcel(excelFile=args.excel, dataLineEnd=dataLineEnd, userRowStart=args.userRowStart)))
+    weekdayList, earlydayList, holidayList = dataToCalendarEvent(convertData(*loadExcel(excelFile=args.excel, dataLineEnd=dataLineEnd, userRowStart=args.userRowStart, workRowStart=args.workRowStart)))
 
     # googlecalendarのserviceの取得
     creds = getCredentials(clientSecretPass=args.clientSecret, tokenPass=args.token)
