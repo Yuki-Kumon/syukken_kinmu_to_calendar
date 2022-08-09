@@ -13,13 +13,13 @@ from utils.insertEvent import insertEvent
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--excel', default='./data/2022_6.xlsx')
+    parser.add_argument('--excel', default='./data/2022_8.xlsx')
     parser.add_argument('--calendarId', default='./secret/calendar.json')
     parser.add_argument('--clientSecret', default='./secret/client_secret_508123958036-57icko740m45opd0utd92891n07p0iqe.apps.googleusercontent.com.json')
     parser.add_argument('--token', default='./secret/accessToken.json')
     parser.add_argument('--dateEnd', type=int, default=31)  # 月の最終日
-    parser.add_argument('--userRowStart', type=int, default=35)
-    parser.add_argument('--workRowStart', type=int, default=58)
+    parser.add_argument('--userRowStart', type=int, default=35)  # 自分の勤務が始まる行数(0から数え始めるため、Excel表示の行番号から1を引く)
+    parser.add_argument('--workRowStart', type=int, default=58)  # 前作業等の情報が記載される行数(0から数え始めるため、Excel表示の行番号から1を引く)
 
     args = parser.parse_args()
 

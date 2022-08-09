@@ -30,7 +30,13 @@ CONVERT_RULE = {
         5: '年休',
         99: 'エラー！勤務表を要確認！',
     },
+    'type': {
+        0: [2, 3, 4, 5],
+        1: [0],
+        2: [1],
+    },
     'remark': {
+        '前': '前作業',
         '本': '本線試運転',
         'A': 'A構内試運転',
         'B': 'B構内試運転',
@@ -100,7 +106,7 @@ def convertData(user_input, work_input, date_input):
         remark_text += convertWork(work_input, idx)
         output.append({
             'date': datetime.datetime.strptime(date_row, '%Y年%m月%d日').strftime('%Y-%m-%d'),
-            'type': 0 if event_type in [2, 3, 4, 5] else 1 if event_type == 0 else 2 if event_type == 1 else event_type,
+            'type': 0 if event_type in CONVERT_RULE['type'][0] else 1 if event_type in CONVERT_RULE['type'][1] else 2 if event_type in CONVERT_RULE['type'][2] else event_type,
             'title': CONVERT_RULE['description'].get(event_type),
             'remark': remark_text,
         })
